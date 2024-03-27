@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.labsystem.dao.UserMapper">
+    <insert id="addUserList" parameterType="com.example.labsystem.pojo.User">
+        insert into users
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="username !=null">
+                username,
+            </if>
+            <if test="password !=null">
+                password,
+            </if>
+            <if test="roleId !=null">
+                roleId,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="username !=null">
+                #{username},
+            </if>
+            <if test="password !=null">
+                #{password},
+            </if>
+            <if test="roleId !=null">
+                #{roleId},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateUserList">
+        update users
+        <set>
+            <if test="username!=null">
+                username =#{username},
+            </if>
+            <if test="password !=null">
+                password =#{password},
+            </if>
+            <if test="roleId !=null">
+                roleId =#{roleId},
+            </if>
+        </set>
+        where id =#{id}
+    </update>
+    <delete id="deleteUser">
+        delete from users where id =#{id}
+    </delete>
+
+    <select id="getUserList" resultMap="result">
+        select
+        id,username,roleId,is_default
+        from users
+        <where>
+            <if test="username!= null">
+                and username =#{username}
+            </if>
+            <if test="password!= null">
+                and password =#{password}
+            </if>
+        </where>
+    </select>
+    <resultMap id="result" type="com.example.labsystem.pojo.User">
+        <id column="id" property="id"></id>
+        <result column="username" property="username"></result>
+        <result column="roleId" property="roleId"></result>
+        <result column="is_default" property="is_default"></result>
+        <association property="role" select="getRole" column="roleId" javaType="com.example.labsystem.pojo.Role">
+
+        </association>
+    </resultMap>
+
+    <select id="getRole" resultType="com.example.labsystem.pojo.Role">
+        select *
+        from roles
+        where id = #{roleId}
+    </select>
+</mapper>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.labsystem.dao.LabMapper">
+    <insert id="addLab" parameterType="com.example.labsystem.pojo.Lab">
+        insert into labs
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="title !=null">
+                title,
+            </if>
+            <if test="capacity !=null">
+                capacity,
+            </if>
+            <if test="lab_type !=null">
+                lab_type,
+            </if>
+            <if test="college_type !=null">
+                college_type,
+            </if>
+            <if test="x !=null">
+                x,
+            </if>
+            <if test="y !=null">
+                y,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="title !=null">
+                #{title},
+            </if>
+            <if test="capacity !=null">
+                #{capacity},
+            </if>
+            <if test="lab_type !=null">
+                #{lab_type},
+            </if>
+            <if test="college_type !=null">
+                #{college_type},
+            </if>
+            <if test="x !=null">
+                #{x},
+            </if>
+            <if test="y !=null">
+                #{y},
+            </if>
+        </trim>
+
+    </insert>
+    <update id="updateLabList">
+        update labs
+        <set>
+            <if test="title !=null">
+                title=#{title},
+            </if>
+            <if test="capacity !=null">
+                capacity=#{capacity},
+            </if>
+            <if test="lab_type !=null">
+                lab_type= #{lab_type},
+            </if>
+            <if test="college_type !=null">
+                college_type=#{college_type},
+            </if>
+            <if test="x !=null">
+                x=#{x},
+            </if>
+            <if test="y !=null">
+                y=#{y},
+            </if>
+        </set>
+            where id =#{id}
+    </update>
+    <delete id="deleteLabList">
+        delete from labs where id=#{id};
+    </delete>
+    <select id="getLabList" resultType="com.example.labsystem.pojo.Lab">
+        select * from labs;
+    </select>
+</mapper>

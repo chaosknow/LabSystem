@@ -1,0 +1,40 @@
+[
+  {
+    "id": 1,
+    "username": "admin",
+    "password": "123",
+    "role": {
+      "roleName": "管理员",
+      "roleType": 1,
+      "rights": [
+        "/index",
+        "/user-manage",
+        "/user-manage/list",
+        "/right-manage",
+        "/right-manage/rightlist",
+        "/right-manage/rolelist",
+        "/lab-manage",
+        "/lab-manage/lablist",
+        "/lab-manage/addlab",
+        "/book-manage/auditlist",
+        "/book-manage/booklist",
+        "/book-manage"
+      ]
+    }
+  },
+  {
+    "id": 2,
+    "username": "lin",
+    "password": "123",
+    "role": {
+      "roleName": "教师",
+      "roleType": 2,
+      "rights": [
+        "/index",
+        "/book-manage/addbook",
+        "/book-manage/booklist",
+        "/book-manage"
+      ]
+    }
+  }
+]
